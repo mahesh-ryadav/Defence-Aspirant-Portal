@@ -1,15 +1,9 @@
 package com.defence.portal.auth.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+ 
 @Entity
 @Table(name = "roles")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +12,29 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
+
+    // Constructors
+    public Role() {}
+
+    public Role(ERole name) {
+        this.name = name;
+    }
+
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public ERole getName() {
+        return name;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(ERole name) {
+        this.name = name;
+    }
 }

@@ -2,13 +2,9 @@ package com.defence.portal.examportal.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "exam_results")
-@Getter
-@Setter
 public class ExamResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +28,73 @@ public class ExamResult {
 
     @Enumerated(EnumType.STRING)
     private ResultStatus resultStatus;
+
+    // Constructors
+    public ExamResult() {}
+
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public ExamAttempt getAttempt() {
+        return attempt;
+    }
+
+    public Integer getTotalQuestions() {
+        return totalQuestions;
+    }
+
+    public Integer getCorrectCount() {
+        return correctCount;
+    }
+
+    public Integer getIncorrectCount() {
+        return incorrectCount;
+    }
+
+    public Integer getUnattemptedCount() {
+        return unattemptedCount;
+    }
+
+    public Double getFinalScore() {
+        return finalScore;
+    }
+
+    public ResultStatus getResultStatus() {
+        return resultStatus;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAttempt(ExamAttempt attempt) {
+        this.attempt = attempt;
+    }
+
+    public void setTotalQuestions(Integer totalQuestions) {
+        this.totalQuestions = totalQuestions;
+    }
+
+    public void setCorrectCount(Integer correctCount) {
+        this.correctCount = correctCount;
+    }
+
+    public void setIncorrectCount(Integer incorrectCount) {
+        this.incorrectCount = incorrectCount;
+    }
+
+    public void setUnattemptedCount(Integer unattemptedCount) {
+        this.unattemptedCount = unattemptedCount;
+    }
+
+    public void setFinalScore(Double finalScore) {
+        this.finalScore = finalScore;
+    }
+
+    public void setResultStatus(ResultStatus resultStatus) {
+        this.resultStatus = resultStatus;
+    }
 }

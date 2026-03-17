@@ -1,9 +1,27 @@
 package com.defence.portal.examportal.dto;
 
-import lombok.Data;
-
-@Data
 public class UpdateOptionRequestDTO {
     private String optionKey;
     private String optionText;
+
+    // Constructors
+    public UpdateOptionRequestDTO() {}
+
+    // Getters
+    public String getOptionKey() {
+        return optionKey;
+    }
+
+    public String getOptionText() {
+        return optionText;
+    }
+
+    // Setters
+    public void setOptionKey(String optionKey) {
+        this.optionKey = optionKey;
+    }
+
+    public void setOptionText(String optionText) {
+        this.optionText = optionText;
+    }
 }

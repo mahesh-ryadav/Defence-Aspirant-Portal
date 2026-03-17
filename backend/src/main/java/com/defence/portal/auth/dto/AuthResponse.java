@@ -1,14 +1,7 @@
 package com.defence.portal.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthResponse {
     private String token;
     private String type = "Bearer";
@@ -17,11 +10,64 @@ public class AuthResponse {
     private String email;
     private List<String> roles;
 
-    public AuthResponse(String accessToken, Long id, String username, String email, List<String> roles) {
-        this.token = accessToken;
+    // Constructors
+    public AuthResponse() {}
+
+    public AuthResponse(String token, Long id, String username, String email, List<String> roles) {
+        this.token = token;
         this.id = id;
         this.username = username;
         this.email = email;
+        this.roles = roles;
+    }
+
+    // Getters
+    public String getToken() {
+        return token;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    // Setters
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }

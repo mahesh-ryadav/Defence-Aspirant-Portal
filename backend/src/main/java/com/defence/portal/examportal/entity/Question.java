@@ -4,15 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "questions")
-@Getter
-@Setter
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +38,73 @@ public class Question {
     // Rel: One Question -> Many Options
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Option> options;
+
+    // Constructors
+    public Question() {}
+
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public Integer getMarks() {
+        return marks;
+    }
+
+    public String getCorrectAnswerKey() {
+        return correctAnswerKey;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public void setMarks(Integer marks) {
+        this.marks = marks;
+    }
+
+    public void setCorrectAnswerKey(String correctAnswerKey) {
+        this.correctAnswerKey = correctAnswerKey;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
 }
