@@ -1,138 +1,320 @@
-# 🛡️ Defence Aspirant Portal – Backend
+# Defence Aspirant Portal 🛡️
 
-[![Java Version](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)](https://openjdk.org/projects/jdk/21/)
-[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.1-brightgreen?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=flat-square&logo=mysql)](https://www.mysql.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Frontend](https://img.shields.io/website?down_message=offline&label=Frontend&url=https%3A%2F%2Fdefence-aspirant-portal.vercel.app)](https://defence-aspirant-portal.vercel.app)
+[![Backend](https://img.shields.io/website?down_message=offline&label=Backend&url=https%3A%2F%2Fdefence-aspirant-portal.onrender.com)](https://defence-aspirant-portal.onrender.com)
 
-A robust, enterprise-grade Spring Boot backend designed for a comprehensive defence exam preparation platform. This system handles everything from exam notifications and mock tests to result tracking and user authentication.
+The **Defence Aspirant Portal** is a comprehensive web platform designed for defence exam aspirants. Practice mock tests, view latest notifications, access study materials, and track your preparation progress.
 
----
+## ✨ Live Demo
 
-## 🚀 Key Modules & Features
+- **Frontend**: [https://defence-aspirant-portal.vercel.app](https://defence-aspirant-portal.vercel.app)
+- **Backend API**: [https://defence-aspirant-portal.onrender.com](https://defence-aspirant-portal.onrender.com)
+- **Swagger API Docs**: [https://defence-aspirant-portal.onrender.com/swagger-ui.html](https://defence-aspirant-portal.onrender.com/swagger-ui.html)
 
-### 🔐 Authentication & Authorization
-- **JWT-based Security**: Secure stateless authentication using JSON Web Tokens.
-- **Role-Based Access Control (RBAC)**: Distinct permissions for `ADMIN` and `CANDIDATE` roles.
-- **Secure Registration/Login**: Managed via `AuthController`.
-
-### 📢 Notification Management
-- **Dynamic Updates**: Real-time announcements for exam dates, admit cards, and results.
-- **Content Management**: Store and retrieve detailed exam information like syllabus, patterns, and physical standards.
-
-### 📝 Comprehensive Mock Test System
-- **Advanced Exam Engine**: Support for multiple exam types (BSF, SSC, NDA, etc.).
-- **Granular Question Bank**: MCQ and numeric questions with difficulty levels and section-wise organization.
-- **Real-time Attempt Tracking**: Monitor test duration, status, and scores.
-
-### 📊 Result Analytics
-- **Performance History**: Track user scores and attempt statistics.
-- **Rankings & Feedback**: (Planned) Comparative analysis and performance insights.
-
----
-
-## 🏗️ System Architecture
-
-```mermaid
-graph TD
-    Client[Frontend / Mobile App] -- REST API / JSON --> API[Spring Boot Controller]
-    API -- DTOs --> Service[Business Logic Layer]
-    Service -- Entities --> Repo[JPA Repository]
-    Repo -- SQL --> DB[(MySQL Database)]
-    
-    subgraph "Internal Processing"
-    Service -- Security Check --> Security[Spring Security / JWT]
-    Service -- Mapping --> Mapper[MapStruct / ModelMapper]
-    end
+**Demo Credentials:**
+```
+Username: demo@example.com
+Password: password123
 ```
 
----
+## 🚀 Features
 
-## 🛠️ Technology Stack
+- **Mock Test System**: Timed exams with MCQs, auto-evaluation, results
+- **JWT Authentication**: Secure login/register with role-based access
+- **Notifications**: Real-time exam updates and announcements
+- **Study Materials**: Upload/download categorized PDFs/documents
+- **Admin Dashboard**: Create exams, manage questions/options, notifications
+- **Responsive UI**: Modern React interface optimized for all devices
+- **File Upload**: Secure study material management
 
-| Category | Technology |
-| :--- | :--- |
-| **Core** | Java 21, Spring Boot 3.4.x |
-| **Persistence**| Spring Data JPA, Hibernate, MySQL |
-| **Security** | Spring Security, JJWT |
-| **Mapping** | MapStruct, ModelMapper |
-| **Utilities** | Lombok, Dotenv, Jakarta Validation |
-| **API Docs** | Springdoc OpenAPI (Swagger) |
+## 🛠 Tech Stack
 
----
+| Component | Technology |
+|-----------|------------|
+| **Frontend** | React 18 + Vite + Tailwind CSS + React Router |
+| **Backend** | Spring Boot 3 + Java 17 + Spring Security (JWT) |
+| **Database** | PostgreSQL |
+| **Authentication** | JWT + Spring Security |
+| **File Storage** | Local storage with streaming download |
+| **API Docs** | OpenAPI/Swagger |
+| **Frontend Deploy** | Vercel |
+| **Backend Deploy** | Render (Docker) |
 
-## ⚙️ Getting Started
+## 🏗 System Architecture
+
+```
+Frontend (React + Vite) ─── HTTPS ─── Vercel ─── API Calls ─── Backend (Spring Boot)
+                                                              │
+                                                              ├── PostgreSQL (Render)
+                                                              └── File Storage
+```
+
+- **Stateless JWT Auth**: Token-based, no sessions
+- **RESTful APIs**: Clean endpoints with DTOs
+- **Role-based Access**: USER/ADMIN roles
+- **CORS Enabled**: Cross-origin requests from Vercel + localhost
+
+## 📁 Project Structure
+
+```
+Defence-Aspirant-Portal/
+├── frontend/                 # React + Vite app
+│   ├── src/
+│   │   ├── components/       # Reusable UI components
+│   │   ├── services/         # API clients
+│   │   ├── pages/            # Page components
+│   │   └── contexts/         # Auth context
+│   ├── .env                  # Vite env vars
+│   └── package.json
+│
+└── backend/                  # Spring Boot API
+    ├── src/main/java/com/defence/portal/
+    │   ├── auth/             # Authentication & JWT
+    │   ├── examportal/       # Mock test logic
+    │   ├── notification/     # Notifications
+    │   ├── studymaterials/   # File management
+    │   └── config/           # CORS, Security, OpenAPI
+    ├── src/main/resources/
+    │   └── application.properties
+    ├── pom.xml              # Maven dependencies
+    └── Dockerfile           # Render deployment;
+```
+
+## 📚 Backend API Documentation
+
+### Authentication APIs
+
+**`POST /api/auth/login`**
+> Authenticate user and return JWT token
+
+**Request:**
+```json
+{
+  \"username\": \"demo@example.com\",
+  \"password\": \"password123\"
+}
+```
+
+**Response:**
+```json
+{
+  \"token\": \"eyJhbGciOiJIUzI1NiJ9...token...\"
+}
+```
+
+**`POST /api/auth/register`**
+> Register new user
+
+**Request:**
+```json
+{
+  \"username\": \"newuser\",
+  \"email\": \"new@example.com\",
+  \"password\": \"securepass123\"
+}
+```
+
+**Response:** `\"User registered successfully!\"`
+
+**`GET /api/auth/profile`**
+> Get current user profile (JWT required)
+
+**Response:**
+```json
+{
+  \"id\": 1,
+  \"username\": \"demo\",
+  \"email\": \"demo@example.com\",
+  \"roles\": [\"ROLE_USER\"]
+}
+```
+
+### Exam APIs (Public + Authenticated)
+
+**`GET /api/exams`**
+> Get all active exams
+
+**Response:** `Array<ExamDTO>`
+
+**`GET /api/exams/{examId}`**
+> Get exam details
+
+**`POST /api/exams/{examId}/start`**
+> Start exam (returns attempt ID)
+
+**`GET /api/attempts/{attemptId}/questions`**
+> Get questions for attempt
+
+**`POST /api/attempts/{attemptId}/answers`**
+> Submit answer
+
+**Request:**
+```json
+{
+  \"questionId\": 1,
+  \"selectedOptionKey\": \"A\"
+}
+```
+
+**`POST /api/attempts/{attemptId}/submit`**
+> Submit exam for evaluation
+
+**Response:** `ExamResultDTO`
+
+**`GET /api/attempts/{attemptId}/result`**
+> Get exam results
+
+### Admin Exam APIs (ADMIN role)
+
+**`POST /api/admin/exams`**
+> Create exam
+
+**Request:** `CreateExamRequestDTO`
+
+**`POST /api/admin/exams/{examId}/questions`**
+> Add question to exam
+
+**`POST /api/admin/questions/{questionId}/options`**
+> Add option to question
+
+**`PUT/PATCH /api/admin/exams/{examId}`**
+> Update exam
+
+**`PUT/PATCH /api/admin/questions/{questionId}`**
+> Update question
+
+**`PUT/PATCH /api/admin/options/{optionId}`**
+> Update option
+
+### Notification APIs
+
+**`GET /api/notifications`**
+> Get all notifications
+
+**`GET /api/notifications/{id}`**
+> Get single notification
+
+### Admin Notification APIs (ADMIN)
+
+**`POST /api/admin/notifications`**
+> Create notification
+
+**Request:** `NotificationDto`
+
+**`PUT /api/admin/notifications/{id}`**
+> Update notification
+
+**`DELETE /api/admin/notifications/{id}`**
+> Delete notification
+
+### Study Material APIs
+
+**`GET /api/study-material`**
+> Get all study materials
+
+**`GET /api/study-material/category/{categoryId}`**
+> Get materials by category
+
+**`GET /api/study-material/download/{id}`**
+> Download file
+
+### Admin Study Material APIs
+
+**`POST /api/admin/study-material/upload`**
+> Upload file (multipart/form-data)
+
+**Params:** `file` (MultipartFile), `categoryId` (Long)
+
+**`DELETE /api/admin/study-material/{id}`**
+> Delete file
+
+### Admin Category APIs
+
+**`POST /api/admin/category`**
+> Create category
+
+**Request:** `Category { name: \"NDA\" }`
+
+**`DELETE /api/admin/category/{id}`**
+> Delete category
+
+**`GET /api/category`**
+> Get all categories
+
+**`GET /api/category/{id}`**
+> Get category by ID
+
+## 🔧 Environment Variables (Backend)
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `SPRING_DATASOURCE_URL` | PostgreSQL connection | `jdbc:postgresql://host:port/db` |
+| `SPRING_DATASOURCE_USERNAME` | DB username | `postgres` |
+| `SPRING_DATASOURCE_PASSWORD` | DB password | `securepass` |
+| `JWT_SECRET` | JWT signing key (32+ chars) | `mySecretKeyForJWT` |
+| `JWT_EXPIRATION_MS` | Token expiry (ms) | `86400000` (24h) |
+
+## 🏃‍♂️ Run Locally
 
 ### Prerequisites
-- **Java JDK 21** or higher
-- **Maven 3.8+**
-- **MySQL 8.0+**
+- Java 17+
+- Node.js 18+
+- PostgreSQL
+- Maven (backend)
+- Docker (optional)
 
-### 1. Database Configuration
-Create a database named `defence_portal_db`:
-```sql
-CREATE DATABASE defence_portal_db;
-```
-
-### 2. Environment Setup
-Create a `.env` file in the root directory (or update `src/main/resources/application.properties`):
-```properties
-SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/defence_portal_db
-SPRING_DATASOURCE_USERNAME=your_username
-SPRING_DATASOURCE_PASSWORD=your_password
-JWT_SECRET=your_base64_secret_key
-```
-
-### 3. Build & Run
+### Backend
 ```bash
-# Clean and install dependencies
-mvn clean install
-
-# Run the application
-mvn spring-boot:run
+cd backend
+cp .env.example .env  # or set env vars
+./mvnw spring-boot:run
 ```
 
-The server will start at `http://localhost:8080`.
-
----
-
-## 📂 Project Structure
-
-```text
-src/main/java/com/defence/portal
-├── auth/           # Authentication & Security module
-├── notification/   # Notification & Announcements module
-├── examportal/     # Core Mock Test & Question engine
-│   ├── controller  # ADMIN & Public APIs
-│   ├── service     # Business Logic
-│   ├── repository  # Data Access
-│   ├── entity      # JPA Models
-│   └── dto         # Data Transfer Objects
-├── config/         # Security & App configuration
-└── exception/      # Global error handling
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
----
+## ☁️ Deployment
 
-## � API Documentation
+### Backend (Render)
+1. Push Docker image or connect Git repo
+2. Set environment variables
+3. Build Command: `./mvnw clean package -DskipTests`
+4. Start Command: `java -jar target/*.jar`
 
-Once the app is running, you can explore the full interactive documentation at:
-- **Swagger UI**: `http://localhost:8080/swagger-ui/index.html`
+### Frontend (Vercel)
+1. Connect GitHub repo
+2. Framework: Vite
+3. Env Var: `VITE_API_BASE_URL=https://defence-aspirant-portal.onrender.com/api`
+4. Deploy auto on push
 
-| Module | Base Path | Role |
-| :--- | :--- | :--- |
-| Auth | `/api/auth` | Public |
-| Admin Exams | `/api/admin/exams` | ADMIN |
-| Notifications | `/api/notifications` | Mixed |
-| Mock Tests | `/api/exams` | CANDIDATE |
+## 📸 Screenshots
 
----
+<!-- Add screenshots here -->
+* [Home/Dashboard](#)
+* [Mock Test](#)
+* [Admin Panel](#)
+* [Study Materials](#)
+
+## 🔮 Future Improvements
+
+- [ ] Real-time notifications (WebSocket)
+- [ ] Exam analytics dashboard
+- [ ] User progress tracking
+- [ ] Payment integration
+- [ ] Mobile app (React Native)
+- [ ] AI question generator
+- [ ] Cloud storage (AWS S3)
 
 ## 👨‍💻 Author
 
-**Mahesh Yadav**
-- 📧 [mahi234xp@gmail.com](mailto:mahi234xp@gmail.com)
-- 🔗 [GitHub Profile](https://github.com/mahesh-ryadav)
+**Mahesh Ryadav**
+- GitHub: [github.com/yourusername](https://github.com/yourusername)
+- LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
 
----
-*Developed with Passion for Defence Aspirants.*
+## 📄 License
+
+This project is open source and available under the MIT License.
