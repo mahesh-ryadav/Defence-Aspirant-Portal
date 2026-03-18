@@ -14,7 +14,7 @@ const AdminExamForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    duration: 60,
+    durationMinutes: 60,
     totalMarks: 100,
     category: "",
     status: "ACTIVE",
