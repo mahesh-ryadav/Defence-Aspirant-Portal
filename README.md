@@ -1,15 +1,11 @@
 # Defence Aspirant Portal 🛡️
-
-[![Frontend](https://img.shields.io/website?down_message=offline&label=Frontend&url=https%3A%2F%2Fdefence-aspirant-portal.vercel.app)](https://defence-aspirant-portal.vercel.app)
 [![Backend](https://img.shields.io/website?down_message=offline&label=Backend&url=https%3A%2F%2Fdefence-aspirant-portal.onrender.com)](https://defence-aspirant-portal.onrender.com)
 
 The **Defence Aspirant Portal** is a comprehensive web platform designed for defence exam aspirants. Practice mock tests, view latest notifications, access study materials, and track your preparation progress.
 
 ## ✨ Live Demo
 
-- **Frontend**: [https://defence-aspirant-portal.vercel.app](https://defence-aspirant-portal.vercel.app)
 - **Backend API**: [https://defence-aspirant-portal.onrender.com](https://defence-aspirant-portal.onrender.com)
-- **Swagger API Docs**: [https://defence-aspirant-portal.onrender.com/swagger-ui.html](https://defence-aspirant-portal.onrender.com/swagger-ui.html)
 
 **Demo Credentials:**
 ```
